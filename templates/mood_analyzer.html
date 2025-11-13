@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Imma — محلل المشاعر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f3f6fb;
+            --card: #A00088;
+            --accent: #7a73fa;
+            --muted: #ffffff;
+            --glass: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, var(--bg), #98b8d8);
+            font-family: Roboto, system-ui, Arial, sans-serif;
+            color: #0f172a;
+            padding: 24px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 950px;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            display: flex;
+            gap: 0;
+            align-items: stretch;
+        }
+
+        .hero {
+            flex: 0 0 260px;
+            padding: 28px;
+            background: linear-gradient(180deg, var(--accent), #4a3bff);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar {
+            font-size: 48px;
+            margin-bottom: 12px
+        }
+
+        .imma-name {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: 0.2px
+        }
+
+        .imma-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            text-align: center
+        }
+
+        .content {
+            flex: 1;
+            padding: 28px
+        }
+
+        h1 {
+            margin: 0 0 8px 0;
+            font-size: 20px
+        }
+
+        p.lead {
+            margin: 0 0 18px 0;
+            color: var(--muted)
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 110px;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #e6eefb;
+            background: linear-gradient(180deg, #fcfeff, #fbfdff);
+            font-size: 15px;
+            color: #0f172a;
+            outline: none
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(76, 64, 255, 0.18)
+        }
+
+        .result {
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px solid #eef3ff;
+            color: #05203b
+        }
+
+        .small {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        footer {
+            margin-top: 18px;
+            font-size: 13px;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        @media (max-width:760px) {
+            .card {
+                flex-direction: column
+            }
+
+            .hero {
+                flex: unset;
+                padding: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card" role="main">
+        <aside class="hero" aria-hidden="false">
+            <div class="avatar">🤖 🖤</div>
+            <div class="imma-name">Imma — محلل المشاعر</div>
+            <div class="imma-sub">اسألني كيف تشعر وسأستمع لك بعناية</div>
+        </aside>
+
+        <section class="content">
+            <h1>مرحباً 👋</h1>
+            <p class="lead">اكتب ما تشعر به أدناه، ثم اضغط "حلل المزاج" للحصول على تحليل بسيط وداعم.</p>
+
+            <form method="POST">
+                <label for="user_text" class="small">اكتب مشاعرك:</label>
+                <textarea id="user_text" name="user_text" placeholder="اكتب هنا...">{{ input_text or '' }}</textarea>
+
+                <div class="row">
+                    <button class="btn" type="submit">🔍 حلل المزاج</button>
+                    <div class="small">مثال: "أنا حزين اليوم" أو "أنا متحمس!"</div>
+                </div>
+            </form>
+
+            {% if result %}
+            <div class="result" aria-live="polite">
+                <strong>النتيجة:</strong>
+                <div style="margin-top:8px">{{ result }}</div>
+            </div>
+            {% endif %}
+
+            <footer>
+                <div>Imma — صديقة دعم بسيطة</div>
+                <div class="small">مصممة بعناية ❤️</div>
+            </footer>
+        </section>
+    </div>
+</body>
+
+</html>
